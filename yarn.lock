@@ -2162,6 +2162,11 @@
     "file-selector" "^0.4.0"
     "prop-types" "^15.8.1"
 
+"react-image-gallery@^1.2.7":
+  "integrity" "sha512-ts7yMWykvZhslGMuvVAUk7a1dJIx9QtIwK6Clv8dOGxPsJid92FRrLvXbZDvkYcUyj48sHalnBhqU6mZNCB2jg=="
+  "resolved" "https://registry.npmjs.org/react-image-gallery/-/react-image-gallery-1.2.7.tgz"
+  "version" "1.2.7"
+
 "react-is@^16.13.1", "react-is@^16.6.0", "react-is@^16.7.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
@@ -2185,7 +2190,7 @@
     "react-is" "^16.6.0"
     "react-lifecycles-compat" "^3.0.0"
 
-"react@^0.14.0 || ^15.0.0-0 || ^16.0.0-0", "react@>= 16.8":
+"react@^0.14.0 || ^15.0.0-0 || ^16.0.0-0", "react@^16.0.0 || ^17.0.0", "react@>= 16.8":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"

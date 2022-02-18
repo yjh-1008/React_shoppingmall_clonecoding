@@ -68,4 +68,8 @@ router.get("/logout", auth, (req, res) => {
     });
 });
 
+router.post("/add_to_cart", auth, (req, res) => {
+    
+});
+
 module.exports = router;

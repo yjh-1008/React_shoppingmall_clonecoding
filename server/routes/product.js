@@ -103,20 +103,18 @@ router.post('/products', (req, res) => {
     }
 
     router.get('/product_by_id', (req, res) => {
-
-        
         let type=req.query.type
-        let productId=req.query
-        console.log(productId)
+        let productId=req.query.id
         //productId를 이용해서 db에서 productId와 같은 상품의 정보를 가져온다.
 
-        Product.find({_id:productId._id})
+        Product.find({_id:productId})
         .populate('writer')
         .exec((err, product)=>{
             if (err){
-                console.log('error!')
                 return res.status(400).send(err)
             }
+            console.log(productId)
+            console.log(product)
             return res.status(200).send({success:true, product})
         })
 
