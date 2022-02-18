@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -50,6 +51,7 @@ router.post('/products', (req, res) => {
 
     let limit=req.body.limit?parseInt(req.body.limit):20;
     let skip = req.body.skip?parseInt(req.body.skip):0;
+    let term= req.body.searchTerm
     let findArgs= {};
     for(let key in req.body.filters){
         if(req.body.filters[key].length>0){
@@ -68,21 +70,61 @@ router.post('/products', (req, res) => {
         }
     }
     console.log('findArgs', findArgs);
-    //product collection에 들어있는 모든 상품정보를 가져오기
-    Product.find(findArgs)
-        .populate("writer")
-        .skip(skip)
-        .limit(limit)
-        .exec((err, productsInfo)=>{
-            if(err) return res.status(400).json({success:false, err})
-            return res.status(200).json({
-                success:true,
-                productsInfo, 
-                postSize:productsInfo.length
 
-            })
+    if (term) {
+        //product collection에 들어있는 모든 상품정보를 가져오기
+        Product.find(findArgs)
+        .find({$text:{$search:term}})
+          .populate("writer")
+          .skip(skip)
+          .limit(limit)
+          .exec((err, productsInfo) => {
+            if (err) return res.status(400).json({ success: false, err });
+            return res.status(200).json({
+              success: true,
+              productsInfo,
+              postSize: productsInfo.length,
+            });
+          });
+    } else {
+        //product collection에 들어있는 모든 상품정보를 가져오기
+        Product.find(findArgs)
+            .populate("writer")
+            .skip(skip)
+            .limit(limit)
+            .exec((err, productsInfo) => {
+            if (err) return res.status(400).json({ success: false, err });
+            return res.status(200).json({
+                success: true,
+                productsInfo,
+                postSize: productsInfo.length,
+            });
+            });
+    }
+
+    router.get('/product_by_id', (req, res) => {
+
+        
+        let type=req.query.type
+        let productId=req.query
+        console.log(productId)
+        //productId를 이용해서 db에서 productId와 같은 상품의 정보를 가져온다.
+
+        Product.find({_id:productId._id})
+        .populate('writer')
+        .exec((err, product)=>{
+            if (err){
+                console.log('error!')
+                return res.status(400).send(err)
+            }
+            return res.status(200).send({success:true, product})
         })
 
+    
+    })
+    
+
 })
+
 
 module.exports = router;
