@@ -8,14 +8,10 @@ const DetailProductPage=(props)=>{
     const [product, setProduct] =useState({})
     useEffect(()=>{
         axios.get(`/api/product/product_by_id?id=${productId}&type=single`)
-        .then(response=>{
-            if(response.data.success){
-                console.log('reaponse.data',response.data)
-                setProduct(response.data.product[0])
-            }else{
-                alert('상세정보 가져오기를 실패했습니다.')
-            }
-        })
+            .then(response=>{ 
+                setProduct(response.data[0])
+                })
+            .catch(err=>alert(err))
     },[])
     return(
         <div style={{width:'100%', paddimg:'3rem 4rem'}}>
